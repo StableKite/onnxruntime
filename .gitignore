@@ -198,3 +198,6 @@ Package.resolved
 .build/
 .swiftpm/
 repros/
+
+# Small, reviewed CPU inference fixture for the delivery contract.
+!.github/testdata/cp315t_matmul_add.onnx

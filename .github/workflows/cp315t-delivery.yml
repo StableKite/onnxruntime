@@ -1,0 +1,22 @@
+name: CPython 3.15t Windows CPU delivery
+on:
+  push:
+    branches: [stablekite/cp315t-pip]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.15t'
+      - run: python -m pip install .
+      - name: Actual CPU APIs and native worker callback with natural GIL OFF
+        run: python -u .github/scripts/cp315t_native_contract.py .github/testdata/cp315t_matmul_add.onnx
+      - run: python -m pip check

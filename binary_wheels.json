@@ -1,0 +1,36 @@
+{
+  "source_commit": "6af1a932e2286d5c58166085d24c68783033edee",
+  "source_project": "734941c5ef41a9cf284bf6aa262af1d6a4da99843f61b1104acef27415040465",
+  "delivery_paths": [
+    "_binary_wheel_backend.py",
+    "_source_pep517.py",
+    "binary_wheels.json",
+    "README.pip-source.md",
+    "pyproject.toml",
+    ".github/workflows/cp315t-delivery.yml",
+    ".github/scripts/cp315t_native_contract.py",
+    ".github/testdata/cp315t_matmul_add.onnx",
+    ".gitignore"
+  ],
+  "delivery_source_hashes": {
+    "_binary_wheel_backend.py": "d9d22b9ca2487fb2dd2b41d9e60599745718840389f2d3b65c7b74ea09344f20",
+    "_source_pep517.py": "766b24f13b52b0234c2988a816eb7a740e357a716adb8456ea85b7ad5436e5d4",
+    "README.pip-source.md": "56b11c5ec0419493433c4e0dee5b7473d294ce1cd14c52604b239421529ed93a",
+    "pyproject.toml": "45d3df5e3840e62d5cdbcb53d420898afbce0edabc1074fa385b573a54e506a1",
+    ".github/workflows/cp315t-delivery.yml": "9e5a80d048c695160d6c8b7ba054386a53140445d61da9779edc9ecf16db3856",
+    ".github/scripts/cp315t_native_contract.py": "f2dda934f583b0f7bcfd655959e2ba078c4f2d1ddd6ef0bf3f2097321952fa4b",
+    ".github/testdata/cp315t_matmul_add.onnx": "eb92b55941a4f55a23e744ba13a33c650c681f59e423c0e5cfca620446781a2e",
+    ".gitignore": "2ea57d77931c7e0531e884fcb864a3f3754f0629376ca84741bc69a8ab5790bd"
+  },
+  "minimum_glibc": [
+    2,
+    39
+  ],
+  "artifacts": {
+    "win_amd64": {
+      "filename": "onnxruntime-1.31.1-cp315-cp315t-win_amd64.whl",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261031/onnxruntime-1.31.1-cp315-cp315t-win_amd64.whl",
+      "sha256": "f0904f170d0623303c9353fbf23785eb1375b00c8fa1b788f7e1b3b1e4e371ff"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel", "packaging"]
-build-backend = "setuptools.build_meta"
+requires = ["packaging>=23", "tomli>=2; python_version<'3.11'"]
+build-backend = "_binary_wheel_backend"
+backend-path = ["."]
 
 [tool.pydocstyle]
 convention = "google"
