@@ -365,6 +365,8 @@ class WindowsRandomAccessFile final : public RandomAccessFile {
       : file_handle_(std::move(file_handle)), copy_on_write_(copy_on_write) {}
   ORT_DISALLOW_COPY_ASSIGNMENT_AND_MOVE(WindowsRandomAccessFile);
 
+  FileHandle GetNativeHandle() const noexcept override { return file_handle_.get(); }
+
   Status GetLength(uint64_t& length) const override {
     LARGE_INTEGER file_size{};
     if (!GetFileSizeEx(file_handle_.get(), &file_size)) {
