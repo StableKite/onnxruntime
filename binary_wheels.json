@@ -1,5 +1,5 @@
 {
-  "source_commit": "4f5b5dfbd76380a158c075f75b2629a9b5409541",
+  "source_commit": "000eed699d4eecebe5115d394a0a8eccd7104bfc",
   "source_project": "734941c5ef41a9cf284bf6aa262af1d6a4da99843f61b1104acef27415040465",
   "delivery_paths": [
     "_binary_wheel_backend.py",
@@ -24,7 +24,7 @@
     ".github/testdata/cp315t_matmul_add.onnx": "eb92b55941a4f55a23e744ba13a33c650c681f59e423c0e5cfca620446781a2e",
     ".gitignore": "2ea57d77931c7e0531e884fcb864a3f3754f0629376ca84741bc69a8ab5790bd",
     ".github/scripts/cp315t_shutdown_contract.py": "1de4cd415119f0d2522505451b32fcea879717508b95f13829342a131a625dc6",
-    ".github/testdata/cp315t_shutdown_artifacts.json": "ac1040b53c14fb8c055477326a4c3157017aecec776dff5687d9b1c479d27882"
+    ".github/testdata/cp315t_shutdown_artifacts.json": "9be72759b2656b69e2400921fc225926710a681094fa573541e61a548f9dd9af"
   },
   "minimum_glibc": [
     2,
@@ -36,5 +36,7 @@
       "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261102-1/onnxruntime-1.31.1+stablekite.1-cp315-cp315t-win_amd64.whl",
       "sha256": "895c0c3ca2817681750d660e1402e5f3eeb54d671ec766215672322b4abde2e9"
     }
-  }
+  },
+  "native_source_commit": "4f5b5dfbd76380a158c075f75b2629a9b5409541",
+  "source_note": "The later source cohort changes only the native CI fixture and delivery metadata. The original runtime wheel and all production C++/Python sources remain unchanged."
 }

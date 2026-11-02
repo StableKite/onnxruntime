@@ -1,17 +1,17 @@
 {
-  "source_commit": "4f5b5dfbd76380a158c075f75b2629a9b5409541",
+  "source_commit": "000eed699d4eecebe5115d394a0a8eccd7104bfc",
   "artifacts": [
     {
       "filename": "onnxruntime_telemetry_shutdown_test.exe",
-      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261102-1/onnxruntime_telemetry_shutdown_test.exe",
       "bytes": 10752,
-      "sha256": "e9874e2a2e196fd317a546a304575255cc2dc6a365c15b0ccb49fd36bd362a78"
+      "sha256": "e9874e2a2e196fd317a546a304575255cc2dc6a365c15b0ccb49fd36bd362a78",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-shutdown-regression-20261102-2/onnxruntime_telemetry_shutdown_test.exe"
     },
     {
       "filename": "onnxruntime_telemetry_shutdown_test_library.dll",
-      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261102-1/onnxruntime_telemetry_shutdown_test_library.dll",
-      "bytes": 2021376,
-      "sha256": "4e74a675bf8272bf4f3b48f359581dd098d3a48e580c9b83cbf2a5bd3e69362f"
+      "bytes": 2021888,
+      "sha256": "fe6759512ddbbed343400683fa14a4fdfa6e71546906f7f460a77bae8b5e35ae",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-shutdown-regression-20261102-2/onnxruntime_telemetry_shutdown_test_library.dll"
     }
   ]
 }
