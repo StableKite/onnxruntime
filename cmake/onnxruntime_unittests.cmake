@@ -21,6 +21,10 @@ if(WIN32 AND onnxruntime_USE_1DS_TELEMETRY)
     "${ONNXRUNTIME_ROOT}/core/dll/dllmain.cc")
   target_include_directories(onnxruntime_telemetry_shutdown_test_library PRIVATE
     "${ONNXRUNTIME_ROOT}" "${ONNXRUNTIME_INCLUDE_DIR}")
+  target_include_directories(onnxruntime_telemetry_shutdown_test_library SYSTEM PRIVATE
+    "${cpp_client_telemetry_SOURCE_DIR}/lib/include/public"
+    "${cpp_client_telemetry_SOURCE_DIR}/lib/include/mat"
+    "${cpp_client_telemetry_SOURCE_DIR}/lib")
   target_link_libraries(onnxruntime_telemetry_shutdown_test_library PRIVATE
     onnxruntime_common ${onnxruntime_EXTERNAL_LIBRARIES})
   onnxruntime_add_executable(onnxruntime_telemetry_shutdown_test

@@ -10,7 +10,9 @@
 #include <thread>
 
 #include "core/platform/telemetry_1ds.h"
+#include <ILogConfiguration.hpp>
 #include <ILogManager.hpp>
+#include <LogManagerProvider.hpp>
 
 namespace onnxruntime {
 
@@ -18,7 +20,30 @@ namespace onnxruntime {
 // No thread is terminated by the test and no process-exit override is used.
 struct OneDsTelemetryShutdownTestAccess {
   static bool HasLiveSdk() {
-    return OneDsTelemetry::log_manager_ != nullptr && OneDsTelemetry::logger_.load() != nullptr;
+    return OneDsTelemetry::log_manager_ != nullptr && OneDsTelemetry::config_ != nullptr;
+  }
+
+  static bool InitializePrivateSdkIfSuppressed() {
+    if (HasLiveSdk()) {
+      return true;
+    }
+    // Preserve ORT's CI/privacy suppression. The fixture owns a real SDK with an
+    // in-memory store and loopback-only collector; it never logs production events.
+    namespace events = Microsoft::Applications::Events;
+    auto config = std::make_unique<events::ILogConfiguration>();
+    (*config)[events::CFG_STR_COLLECTOR_URL] = "http://127.0.0.1:9/ort-shutdown-test";
+    (*config)[events::CFG_STR_CACHE_FILE_PATH] = ":memory:";
+    (*config)[events::CFG_BOOL_ENABLE_NET_DETECT] = false;
+    (*config)[events::CFG_INT_MAX_TEARDOWN_TIME] = 0;
+    events::status_t status;
+    auto* manager = events::LogManagerProvider::CreateLogManager("OrtShutdownRegression", true, *config, status);
+    if (status != events::STATUS_SUCCESS || manager == nullptr) {
+      return false;
+    }
+    OneDsTelemetry::config_ = std::move(config);
+    OneDsTelemetry::log_manager_ = manager;
+    std::fputs("Real private SDK initialized with loopback collector; suppression retained.\n", stderr);
+    return true;
   }
 
   static bool IsClean() {
@@ -91,6 +116,7 @@ extern "C" __declspec(dllexport) int InitializeTelemetryShutdownTest(int kind) {
   auto& fixture = GetFixture();
   fixture.telemetry = std::make_unique<onnxruntime::OneDsTelemetry>();
   if (kind < 0 || kind > 3 || onnxruntime::IsProcessShuttingDown() ||
+      !onnxruntime::OneDsTelemetryShutdownTestAccess::InitializePrivateSdkIfSuppressed() ||
       !onnxruntime::OneDsTelemetryShutdownTestAccess::HasLiveSdk()) {
     return 1;
   }
