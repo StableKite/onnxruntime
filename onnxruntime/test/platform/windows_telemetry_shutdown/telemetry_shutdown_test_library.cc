@@ -27,6 +27,9 @@ struct OneDsTelemetryShutdownTestAccess {
     if (HasLiveSdk()) {
       return true;
     }
+    if (!OneDsTelemetry::telemetry_disabled_.load()) {
+      return false;
+    }
     // Preserve ORT's CI/privacy suppression. The fixture owns a real SDK with an
     // in-memory store and loopback-only collector; it never logs production events.
     namespace events = Microsoft::Applications::Events;
@@ -43,7 +46,7 @@ struct OneDsTelemetryShutdownTestAccess {
     OneDsTelemetry::config_ = std::move(config);
     OneDsTelemetry::log_manager_ = manager;
     std::fputs("Real private SDK initialized with loopback collector; suppression retained.\n", stderr);
-    return true;
+    return OneDsTelemetry::telemetry_disabled_.load() && !OneDsTelemetry::enabled_.load();
   }
 
   static bool IsClean() {
