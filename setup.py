@@ -803,6 +803,9 @@ if nightly_build:
 if local_version:
     version_number = version_number + local_version
 
+# Distinguish the fork's native lifecycle fix from the original upstream wheel.
+version_number += ".stablekite.1" if local_version else "+stablekite.1"
+
 if wheel_name_suffix:
     if not (enable_training and wheel_name_suffix == "gpu"):
         # for training packages, local version is used to indicate device types
