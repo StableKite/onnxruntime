@@ -12,9 +12,7 @@
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-#include "core/session/ort_env.h"
-
-extern std::atomic<bool> g_is_shutting_down;
+#include "core/common/process_lifecycle.h"
 
 // dllmain.cc : Defines the entry point for the DLL application.
 BOOL APIENTRY DllMain(HMODULE /*hModule*/,

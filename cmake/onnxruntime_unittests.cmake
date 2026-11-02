@@ -14,6 +14,28 @@ if (onnxruntime_ENABLE_TRAINING)
   list(APPEND TEST_INC_DIR ${ORTTRAINING_ROOT})
 endif()
 
+if(WIN32 AND onnxruntime_USE_1DS_TELEMETRY)
+  set(_telemetry_shutdown_src "${TEST_SRC_DIR}/platform/windows_telemetry_shutdown")
+  onnxruntime_add_shared_library(onnxruntime_telemetry_shutdown_test_library
+    "${_telemetry_shutdown_src}/telemetry_shutdown_test_library.cc"
+    "${ONNXRUNTIME_ROOT}/core/dll/dllmain.cc")
+  target_include_directories(onnxruntime_telemetry_shutdown_test_library PRIVATE
+    "${ONNXRUNTIME_ROOT}" "${ONNXRUNTIME_INCLUDE_DIR}")
+  target_link_libraries(onnxruntime_telemetry_shutdown_test_library PRIVATE
+    onnxruntime_common ${onnxruntime_EXTERNAL_LIBRARIES})
+  onnxruntime_add_executable(onnxruntime_telemetry_shutdown_test
+    "${_telemetry_shutdown_src}/telemetry_shutdown_test_main.cc")
+  add_dependencies(onnxruntime_telemetry_shutdown_test onnxruntime_telemetry_shutdown_test_library)
+  foreach(_mode unload process-exit global-lock sdk-lock sdk-activity)
+    add_test(NAME "onnxruntime_telemetry_shutdown_${_mode}"
+      COMMAND onnxruntime_telemetry_shutdown_test
+        "$<TARGET_FILE:onnxruntime_telemetry_shutdown_test_library>" "${_mode}")
+    set_tests_properties("onnxruntime_telemetry_shutdown_${_mode}" PROPERTIES TIMEOUT 15)
+  endforeach()
+  set_target_properties(onnxruntime_telemetry_shutdown_test_library onnxruntime_telemetry_shutdown_test
+    PROPERTIES FOLDER "ONNXRuntimeTest")
+endif()
+
 # Exclude files based on CMake options.
 function(filter_test_srcs test_srcs_var)
   set(excluded_path_prefixes)

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "core/common/process_lifecycle.h"
 #include "core/platform/telemetry.h"
 #include "core/platform/telemetry_environment.h"
 #include "core/platform/telemetry_no_throw.h"
@@ -140,10 +141,15 @@ class OneDsTelemetry : public Telemetry {
                                        const std::string& lib_path) const override;
 
  private:
+  friend struct OneDsTelemetryShutdownTestAccess;
+
   static void ReportFailure(const char* operation_name, const char* message);
 
   template <typename Operation>
   static void RunTelemetryOperation(const char* operation_name, Operation&& operation) noexcept {
+    if (IsProcessShuttingDown()) {
+      return;
+    }
     telemetry_internal::RunTelemetryOperationNoThrow(
         std::forward<Operation>(operation),
         [operation_name](const char* message) { ReportFailure(operation_name, message); });

@@ -325,6 +325,9 @@ void OneDsTelemetry::ReportFailure(const char* operation_name, const char* messa
 }
 
 OneDsTelemetry::OneDsTelemetry() {
+  if (IsProcessShuttingDown()) {
+    return;
+  }
   std::lock_guard<std::mutex> lock(global_mutex_);
 
   // Always increment so destructor pairing is symmetric
@@ -342,6 +345,14 @@ OneDsTelemetry::OneDsTelemetry(const Telemetry& local_telemetry) : OneDsTelemetr
 }
 
 OneDsTelemetry::~OneDsTelemetry() {
+  if (IsProcessShuttingDown()) {
+    // Windows stops the other threads before DLL_PROCESS_DETACH. Neither a mutex
+    // owner nor the SDK's HTTP completion callbacks can make progress now. Leave
+    // their storage to process reclamation, including the configuration referenced
+    // by the still-live SDK. Dynamic DLL unload continues through normal Shutdown.
+    (void)config_.release();
+    return;
+  }
   std::lock_guard<std::mutex> lock(global_mutex_);
 
   global_register_count_--;

@@ -12,11 +12,10 @@
 #include "core/session/allocator_adapters.h"
 #include "core/session/user_logging_sink.h"
 #include "core/common/logging/logging.h"
+#include "core/common/process_lifecycle.h"
 #include "core/framework/provider_shutdown.h"
 #include "core/platform/logging/make_platform_default_log_sink.h"
 
-// Whether the process is shutting down
-std::atomic<bool> g_is_shutting_down(false);
 using namespace onnxruntime;
 using namespace onnxruntime::logging;
 
