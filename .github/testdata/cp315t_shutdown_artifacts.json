@@ -1,0 +1,17 @@
+{
+  "source_commit": "4f5b5dfbd76380a158c075f75b2629a9b5409541",
+  "artifacts": [
+    {
+      "filename": "onnxruntime_telemetry_shutdown_test.exe",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261102-1/onnxruntime_telemetry_shutdown_test.exe",
+      "bytes": 10752,
+      "sha256": "e9874e2a2e196fd317a546a304575255cc2dc6a365c15b0ccb49fd36bd362a78"
+    },
+    {
+      "filename": "onnxruntime_telemetry_shutdown_test_library.dll",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-cpu-engineering-20261102-1/onnxruntime_telemetry_shutdown_test_library.dll",
+      "bytes": 2021376,
+      "sha256": "4e74a675bf8272bf4f3b48f359581dd098d3a48e580c9b83cbf2a5bd3e69362f"
+    }
+  ]
+}

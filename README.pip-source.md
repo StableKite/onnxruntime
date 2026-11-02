@@ -14,3 +14,8 @@ not alter the consumer environment or override the runtime GIL setting.
 These are engineering dependency artifacts. They do not represent a completed
 StableKite product release. Producer tests, wheel checksums and platform limits
 are recorded on the linked engineering artifact release.
+
+The Windows wheel `1.31.1+stablekite.1` includes a native 1DS process-termination
+fix. It retains normal telemetry operation, SDK cleanup, and dynamic DLL unload.
+The delivery CI also verifies the original producer shutdown-test binaries and
+waits for actual child-process completion, including an active SDK worker at exit.
