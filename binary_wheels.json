@@ -35,7 +35,7 @@
   "artifacts": {
     "win_amd64": {
       "filename": "onnxruntime-1.31.1+stablekite.2-cp315-cp315t-win_amd64.whl",
-      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-async-attachment-engineering-20261109-1/onnxruntime-1.31.1+stablekite.2-cp315-cp315t-win_amd64.whl",
+      "url": "https://github.com/StableKite/onnxruntime/releases/download/cp315t-async-attachment-engineering-20261109-1/onnxruntime-1.31.1%2Bstablekite.2-cp315-cp315t-win_amd64.whl",
       "sha256": "c3512283f9fe77a01817cf17b25aea011b7d61086c80d7a965bde9013d284920"
     }
   },
