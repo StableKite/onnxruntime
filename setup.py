@@ -804,7 +804,7 @@ if local_version:
     version_number = version_number + local_version
 
 # Distinguish the fork's native lifecycle fix from the original upstream wheel.
-version_number += ".stablekite.1" if local_version else "+stablekite.1"
+version_number += ".stablekite.2" if local_version else "+stablekite.2"
 
 if wheel_name_suffix:
     if not (enable_training and wheel_name_suffix == "gpu"):

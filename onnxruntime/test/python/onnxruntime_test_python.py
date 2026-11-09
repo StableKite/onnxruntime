@@ -753,6 +753,17 @@ class TestInferenceSession(unittest.TestCase):
             time.sleep(0.01)
         self.assertIsNone(input_ref())
 
+    @unittest.skipIf(sys.version_info < (3, 14), "requires concurrent.interpreters")
+    def test_run_async_after_subinterpreter(self):
+        interpreters = importlib.import_module("concurrent.interpreters")
+
+        # CPython's PyGILState_Check becomes permanently true after this,
+        # including on ORT worker threads with no attached Python state.
+        child = interpreters.create()
+        child.exec("pass")
+        child.close()
+        self.test_run_async()
+
     def test_run_model_from_bytes(self):
         with open(get_name("mul_1.onnx"), "rb") as f:
             content = f.read()

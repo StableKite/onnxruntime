@@ -21,9 +21,13 @@ jobs:
         run: python -u .github/scripts/cp315t_native_contract.py .github/testdata/cp315t_matmul_add.onnx
       - name: Real SDK teardown and Windows process-exit regression
         run: python -u .github/scripts/cp315t_shutdown_contract.py
+      - name: Native callbacks before and during ordinary child shutdown
+        run: python -u .github/scripts/cp315t_async_attachment_contract.py .github/testdata/cp315t_matmul_add.onnx
       - run: python -m pip check
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: native-shutdown-evidence
-          path: onnx-shutdown-ci-evidence/
+          path: |
+            onnx-shutdown-ci-evidence/
+            ort-async-attachment-evidence/

@@ -361,7 +361,13 @@ void AsyncCallback(void* user_data, OrtValue** outputs, size_t num_outputs, OrtS
     DeferPythonRelease(session);
   };
 
-  if (PyGILState_Check()) {
+  // PyGILState_Check() can succeed on an unattached worker after a subinterpreter was created.
+#if PY_VERSION_HEX >= 0x030D0000
+  const auto* thread_state = PyThreadState_GetUnchecked();
+#else
+  const auto* thread_state = _PyThreadState_UncheckedGet();
+#endif
+  if (thread_state != nullptr) {
     invoke_callback();
   } else {
     // acquire GIL to safely:

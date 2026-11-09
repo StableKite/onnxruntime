@@ -19,3 +19,9 @@ The Windows wheel `1.31.1+stablekite.1` includes a native 1DS process-terminatio
 fix. It retains normal telemetry operation, SDK cleanup, and dynamic DLL unload.
 The delivery CI also verifies the original producer shutdown-test binaries and
 waits for actual child-process completion, including an active SDK worker at exit.
+
+The Windows wheel `1.31.1+stablekite.2` additionally attaches native async workers
+using the actual thread state. A previously closed child interpreter no longer
+causes a main-interpreter callback to access Python without an attached state.
+CPU inference and callbacks remain in the main interpreter. NumPy and ORT child
+imports still report their original unsupported-subinterpreter errors.
